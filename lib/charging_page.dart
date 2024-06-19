@@ -13,7 +13,7 @@ class _ChargingPageState extends State<ChargingPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(""),
-        backgroundColor: Colors.blue[900], // Cambio de color a azul marino
+        backgroundColor: const Color.fromRGBO(13, 71, 161, 1), // Cambio de color a azul marino
       ),
       backgroundColor:  const Color.fromARGB(255, 13, 71, 161), // Cambio de color a azul marino
       body: Center(
@@ -59,7 +59,7 @@ class _ChargingPageState extends State<ChargingPage> {
             ),
             const SizedBox(height: 20),
             const Text(
-              "Bienvenidos a We Got Kicks",
+              "Bienvenidos a Futneet",
               style: TextStyle(
                 fontFamily: "PoetsenOne-Regular",
                 fontSize: 40.0,
@@ -69,7 +69,7 @@ class _ChargingPageState extends State<ChargingPage> {
             ),
             const SizedBox(height: 20),
             const Text(
-              "Los sneakers no son solo zapatos, son una declaración.- Michael Jordan",
+              "El sitio oficial del hincha, el empalador, el loco baldeón",
               style: TextStyle(
                 fontFamily: "Georgia",
                 fontSize: 18.0,

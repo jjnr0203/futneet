@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, sort_child_properties_last
+
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -18,19 +20,18 @@ class _LoginState extends State<Login> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Login"),
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: Color.fromARGB(255, 13, 0, 133),
       ),
-      backgroundColor: Color.fromARGB(255, 253, 253, 218),
+      backgroundColor: Color.fromARGB(255, 199, 199, 199),
       body: Center(
-        // Centro el contenido
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Container(
             padding: const EdgeInsets.all(20.0),
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 238, 238, 238),
-              borderRadius: BorderRadius.circular(20.0),
-              boxShadow: [
+              color: const Color.fromARGB(255, 238, 238, 238),
+              borderRadius: BorderRadius.circular(15.0),
+              boxShadow: const [
                 BoxShadow(
                   color: Colors.black12,
                   blurRadius: 10.0,
@@ -136,7 +137,7 @@ class _LoginState extends State<Login> {
                         },
                         child: const Text('Iniciar Sesión'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(95, 63, 73, 212),
+                          backgroundColor: Color.fromARGB(255, 13, 0, 133),
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 50, vertical: 15),

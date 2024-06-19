@@ -1,207 +1,191 @@
+// ignore_for_file: avoid_print, duplicate_ignore, use_build_context_synchronously, sort_child_properties_last, unused_element
+
+import 'package:app1/firebase_service.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Crear Noticia',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: CreateNewsScreen(),
-    );
-  }
-}
-
 class CreateNewsScreen extends StatefulWidget {
+  const CreateNewsScreen({super.key});
+
   @override
-  _CreateNewsScreenState createState() => _CreateNewsScreenState();
+  State<CreateNewsScreen> createState() => _CreateNewsScreenState();
 }
 
 class _CreateNewsScreenState extends State<CreateNewsScreen> {
-  final List<String> continents = ['Asia', 'Europa', 'América'];
-  final List<String> states = ['Humo', 'Real', 'Rumor'];
-
-  String? selectedContinent;
-  String? selectedState;
-
-  String? title;
-  String? description;
-  String? content;
-
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  void _saveNews() {
-    if (_formKey.currentState!.validate()) {
-      // Aquí puedes implementar la lógica para guardar la noticia
-      // Por ejemplo, puedes enviar los datos a una base de datos o a un servicio web
-      print('Noticia guardada:');
-      print('Título: $title');
-      print('Descripción: $description');
-      print('Contenido: $content');
-      print('Continente: $selectedContinent');
-      print('Estado: $selectedState');
-      // Después de guardar la noticia, puedes redirigir al usuario al home
-      Navigator.pop(context); // Regresa a la pantalla anterior
-    }
-  }
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _contentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Crear Noticia'),
+         backgroundColor: const Color.fromRGBO(13, 71, 161, 1), 
       ),
+      backgroundColor: Color.fromARGB(255, 199, 199, 199),
       body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Container(
-              padding: EdgeInsets.all(20.0),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(20.0),
-              ),
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 3,
               child: Form(
                 key: _formKey,
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(
-                      'Nueva Noticia',
-                      textAlign: TextAlign.center,
+                    const Text(
+                      "Formulario de Noticias",
                       style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
+                        fontFamily: "PoetsenOne-Regular",
+                        fontSize: 30.0,
+                        color: Colors.black,
                       ),
+                      textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 20.0),
-                    TextFormField(
-                      onChanged: (value) => title = value,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor ingrese el título';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'Título',
-                        border: OutlineInputBorder(),
+                    const SizedBox(height: 20),
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
-                    ),
-                    SizedBox(height: 20.0),
-                    TextFormField(
-                      onChanged: (value) => description = value,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor ingrese la descripción';
-                        }
-                        return null;
-                      },
-                      maxLines: 3,
-                      decoration: InputDecoration(
-                        labelText: 'Descripción',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    SizedBox(height: 20.0),
-                    TextFormField(
-                      onChanged: (value) => content = value,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor ingrese el contenido';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'Contenido',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    SizedBox(height: 20.0),
-                    DropdownButtonFormField<String>(
-                      value: selectedContinent,
-                      items: continents.map((String continent) {
-                        return DropdownMenuItem<String>(
-                          value: continent,
-                          child: Text(continent),
-                        );
-                      }).toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedContinent = value;
-                        });
-                      },
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Por favor seleccione el continente';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'Continente',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    SizedBox(height: 20.0),
-                    DropdownButtonFormField<String>(
-                      value: selectedState,
-                      items: states.map((String state) {
-                        return DropdownMenuItem<String>(
-                          value: state,
-                          child: Text(state),
-                        );
-                      }).toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedState = value;
-                        });
-                      },
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Por favor seleccione el estado';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'Estado',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    SizedBox(height: 20.0),
-                    ElevatedButton(
-                      onPressed: _saveNews,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        padding: EdgeInsets.symmetric(
-                          vertical: 12.0,
-                          horizontal: 24.0,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                      elevation: 5,
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 20),
+                            _buildTextField(
+                              controller: _titleController,
+                              labelText: 'Titulo',
+                              icon: Icons.account_circle,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Por favor ingrese el nombre del sneaker';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            _buildTextField(
+                              controller: _descriptionController,
+                              labelText: 'Descripción',
+                              icon: Icons.straighten,
+                              keyboardType: TextInputType.text,
+                            ),
+                            const SizedBox(height: 20),
+                            _buildTextField(
+                              controller: _descriptionController,
+                              labelText: 'Continente',
+                              icon: Icons.wrong_location_rounded,
+                              keyboardType: TextInputType.text,
+                            ),
+                            const SizedBox(height: 20),
+                            _buildTextField(
+                              controller: _contentController,
+                              labelText: 'Contenido',
+                              icon: Icons.whatshot,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Por favor ingrese el modelo del sneaker';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            _buildTextField(
+                              controller: _contentController,
+                              labelText: 'Estado de la noticia',
+                              icon: Icons.start_outlined,
+                            ),
+                            const SizedBox(height: 30),
+                            ElevatedButton(
+                              onPressed: () async{
+                                await addFutneet(_titleController.text);
+                                 // ignore: avoid_print
+                                 print('$_titleController');
+                                 print('$_descriptionController');
+                                 print('$_contentController');
+                                 
+                                if (_formKey.currentState!.validate()) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Datos Enviados')),
+                                  );
+                                   Navigator.pushNamed(context, "/home");
+                                }
+                              },
+                              child: const Text('Enviar'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color.fromARGB(255, 44, 0, 167),
+                                foregroundColor: Colors.black,
+                                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                                textStyle: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      child: Text(
-                        'Enviar',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                         
-                      ),
-                    ),
                     ),
                   ],
                 ),
               ),
             ),
-          ),
+          ],
         ),
       ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String labelText,
+    required IconData icon,
+    TextInputType keyboardType = TextInputType.text,
+    String? Function(String?)? validator,
+  }) {
+    return TextFormField(
+      controller: controller,
+      keyboardType: keyboardType,
+      decoration: InputDecoration(
+        labelText: labelText,
+        prefixIcon: Icon(icon),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        filled: true,
+        fillColor: Colors.white,
+      ),
+      validator: validator,
+    );
+  }
+
+  Widget _buildDropdownButtonFormField({
+    required String? value,
+    required String labelText,
+    required IconData icon,
+    required List<String> items,
+    required ValueChanged<String?> onChanged,
+    String? Function(String?)? validator,
+  }) {
+    return DropdownButtonFormField<String>(
+      value: value,
+      decoration: InputDecoration(
+        labelText: labelText,
+        prefixIcon: Icon(icon),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        filled: true,
+        fillColor: Colors.white,
+      ),
+      items: items.map((label) => DropdownMenuItem(
+        child: Text(label),
+        value: label,
+      )).toList(),
+      onChanged: onChanged,
+      validator: validator,
     );
   }
 }
